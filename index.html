@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Random Team Generator</title>
+  </head>
+  <body>
+    <h2>Random Team Generator</h2>
+    <textarea id="persons" rows="8" cols="40"></textarea> <br>
+    <input type="number" id="totalTeam" value="">
+    <button type="button" id="shuffle">Shuffle</button>
+    <h2>Group List</h2>
+    <div id="output">
+    </div>
+
+    <script type="text/javascript">
+      document.getElementById("shuffle").onclick = function(){
+        var output = document.getElementById("output");
+        var persons = document.getElementById("persons").value;
+        var person = persons.split(",");
+        var totalTeam = document.getElementById("totalTeam").value;
+
+        var random = person.sort(() => Math.random() - 0.5);
+        var team = chunk(random, totalTeam);
+
+        function chunk(random, totalTeam) {
+          if (random.length <= totalTeam) {
+            return [random];
+          }
+          return [random.slice(0, totalTeam), ...chunk(random.slice(totalTeam), totalTeam)];
+        }
+
+        for (var i = 0; i < team.length; i++) {
+          output.innerHTML += "Team " + (i+1) + ": " + team[i] + "<br>";
+        }
+      }
+    </script>
+  </body>
+</html>
