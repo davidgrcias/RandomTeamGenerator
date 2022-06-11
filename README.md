@@ -1,2 +1,0 @@
-# RandomTeamGenerator
-Random Team Generator
